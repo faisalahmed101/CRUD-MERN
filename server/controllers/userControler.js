@@ -12,7 +12,7 @@ export const create = async (req, res) => {
         }
 
         const savedData = await userData.save()
-        res.status(200).json(savedData)
+        res.status(200).json({msg: "User created successfully"})
     } catch (error) {
         res.status(500).send({error: error})
     }
@@ -28,7 +28,7 @@ export const allUsers = async (req, res) => {
         if (!allUser) {
             res.status(404).json({ msg: "User data not found" })
         }
-        res.status(200).json(allUser)
+        res.status(200).json(allUser.reverse())
     } catch (error) {
         res.status(500).json({ error: error })
     }
@@ -59,7 +59,7 @@ export const updateUser = async (req, res)=>{
             res.status(401).json({msg: "User not found"})
         }
         const update = await User.findByIdAndUpdate(id, updatedData, {new: true})
-        res.status(200).json(update)
+        res.status(200).json({msg: "User updated successfully"})
     } catch (error) {
         res.status(500).json({ error: error })
     }
